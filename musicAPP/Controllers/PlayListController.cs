@@ -72,5 +72,11 @@ namespace musicAPP.Controllers
 
             return PlayList;
         }
+
+        public List<String> getAllPlayList()
+        {
+            ModelContext db = new ModelContext();
+            return db.PlayLists.Select(p => p.Nombre).ToList();
+        }
     }
 }
