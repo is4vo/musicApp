@@ -47,9 +47,9 @@ namespace musicAPP
             this.label_biblioteca = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label_canciones = new System.Windows.Forms.Label();
             this.reproducerContainer = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.sideBar.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -57,8 +57,8 @@ namespace musicAPP
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.reproducerContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.reproducerContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,6 +88,7 @@ namespace musicAPP
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(237, 229);
             this.panel4.TabIndex = 1;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // btn_pls_3
             // 
@@ -302,6 +303,15 @@ namespace musicAPP
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(18, 57);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(617, 265);
+            this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
             // label_canciones
             // 
             this.label_canciones.Dock = System.Windows.Forms.DockStyle.Top;
@@ -323,15 +333,6 @@ namespace musicAPP
             this.reproducerContainer.Name = "reproducerContainer";
             this.reproducerContainer.Size = new System.Drawing.Size(647, 127);
             this.reproducerContainer.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 57);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(617, 265);
-            this.dataGridView1.TabIndex = 12;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // axWindowsMediaPlayer1
             // 
@@ -362,8 +363,8 @@ namespace musicAPP
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.reproducerContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.reproducerContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 

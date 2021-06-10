@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +9,7 @@ namespace musicAPP.Models
 {
     public class Cancion
     {
+        [Key]
         public int CancionId { get; set; }
         public String Titulo { get; set; }
         public String Album { get; set; }
@@ -14,6 +17,7 @@ namespace musicAPP.Models
         public String Generos { get; set; }
         public String Compositores { get; set; }
         public Double Duracion { get; set; }
+        [Index(IsUnique = true)]
         public String Ubicacion { get; set; }
 
     }

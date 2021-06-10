@@ -74,9 +74,22 @@ namespace musicAPP
 
         }
 
+        /* Agregar canciones a una Lista de reproduccion de Windows Media Player*/
         private void button5_Click(object sender, EventArgs e)
         {
-
+            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
+            WMPLib.IWMPMedia media;
+            openFileDialog1.Multiselect = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string file in openFileDialog1.FileNames)
+                {
+                    media = axWindowsMediaPlayer1.newMedia(file);
+                    playlist.appendItem(media);
+                }
+            }
+            axWindowsMediaPlayer1.currentPlaylist = playlist;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -107,6 +120,11 @@ namespace musicAPP
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

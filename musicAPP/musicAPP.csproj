@@ -16,7 +16,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Windows 10\Documents\GitHub\apps\</PublishUrl>
+    <PublishUrl>E:\MusicApp\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,7 +26,6 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
@@ -125,9 +124,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CancionController.cs" />
+    <Compile Include="Controllers\PlayListController.cs" />
     <Compile Include="Migrations\202105131550518_Modifica-Modelo-Cancion.cs" />
     <Compile Include="Migrations\202105131550518_Modifica-Modelo-Cancion.designer.cs">
       <DependentUpon>202105131550518_Modifica-Modelo-Cancion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106101446453_ValoresUnicos.cs" />
+    <Compile Include="Migrations\202106101446453_ValoresUnicos.designer.cs">
+      <DependentUpon>202106101446453_ValoresUnicos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CancionPlaylist.cs" />
@@ -144,6 +148,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Migrations\202105131550518_Modifica-Modelo-Cancion.resx">
       <DependentUpon>202105131550518_Modifica-Modelo-Cancion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106101446453_ValoresUnicos.resx">
+      <DependentUpon>202106101446453_ValoresUnicos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MusicApp.resx">
       <DependentUpon>MusicApp.cs</DependentUpon>
