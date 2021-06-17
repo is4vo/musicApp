@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace musicAPP.Controllers
@@ -26,7 +24,7 @@ namespace musicAPP.Controllers
             catch (Exception) { }
 
         }
-        
+
         public void AddSong(OpenFileDialog fileList, String name)
         {
             /* Obtiene PlayList */
@@ -38,7 +36,7 @@ namespace musicAPP.Controllers
             int PlayListId = db.PlayLists.Where(p => p.Nombre == name).Select(p => p.PlayListId).FirstOrDefault();
 
             /* Buscar si existe cancion en DB, sino agregar cancion a DB */
-            foreach(String song in fileList.FileNames)
+            foreach (String song in fileList.FileNames)
             {
                 if (db.Canciones.Where(s => s.Ubicacion == song).Select(s => s.CancionId) == null)
                 {
@@ -64,7 +62,7 @@ namespace musicAPP.Controllers
             List<String> PlayList = new List<string>();
             /* Se obtiene el valor de la PlayList */
             int PlayListId = db.PlayLists.Where(p => p.Nombre == name).Select(p => p.PlayListId).FirstOrDefault();
-            foreach(int CancionId in db.CancionPlaylists.Where(p => p.PlayListId == PlayListId).Select(c => c.CancionId).ToList<int>())
+            foreach (int CancionId in db.CancionPlaylists.Where(p => p.PlayListId == PlayListId).Select(c => c.CancionId).ToList<int>())
             {
                 /* Se agregan las canciones a la cola de canciones */
                 PlayList.Add(db.Canciones.Where(c => c.CancionId == CancionId).Select(path => path.Ubicacion).FirstOrDefault());
