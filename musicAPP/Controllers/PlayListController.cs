@@ -9,7 +9,7 @@ namespace musicAPP.Controllers
     class PlayListController
     {
 
-        public void AddPlayList(String name)
+        public static void AddPlayList(String name)
         {
             PlayList model = new PlayList();
             try
@@ -25,7 +25,7 @@ namespace musicAPP.Controllers
 
         }
 
-        public void AddSong(OpenFileDialog fileList, String name)
+        public static void AddSong(OpenFileDialog fileList, String name)
         {
             /* Obtiene PlayList */
             ModelContext db = new ModelContext();
@@ -56,7 +56,7 @@ namespace musicAPP.Controllers
             }
         }
 
-        public List<String> getPlayList(String name)
+        public static List<String> getPlayList(String name)
         {
             ModelContext db = new ModelContext();
             List<String> PlayList = new List<string>();
@@ -71,10 +71,26 @@ namespace musicAPP.Controllers
             return PlayList;
         }
 
-        public List<String> getAllPlayList()
+        public static List<String> getAllPlayList()
         {
             ModelContext db = new ModelContext();
             return db.PlayLists.Select(p => p.Nombre).ToList();
+        }
+
+        public static bool removePlayList(string name)
+        {
+            using (ModelContext db = new ModelContext())
+            {
+                var itemRemoved = db.PlayLists.SingleOrDefault(p => p.Nombre == name);
+
+                if (itemRemoved != null)
+                {
+                    db.PlayLists.Remove(itemRemoved);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
         }
     }
 }

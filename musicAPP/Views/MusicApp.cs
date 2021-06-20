@@ -22,6 +22,11 @@ namespace musicAPP
         /* Abrir buscador de archivos */
         private void button1_Click(object sender, EventArgs e)
         {
+            actualizarPanelesCanciones();
+        }
+
+        private void actualizarPanelesCanciones()
+        {
             flowLayoutPanel2.Controls.Clear();
             crearCuadroSecciónCanciones();
             flowLayoutPanel1.Controls.Clear();
@@ -41,11 +46,6 @@ namespace musicAPP
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_albunes_Click(object sender, EventArgs e)
         {
 
@@ -57,7 +57,14 @@ namespace musicAPP
 
         private void btn_add_pls_Click(object sender, EventArgs e)
         {
-
+            Form f = new Form();
+            f.StartPosition = FormStartPosition.CenterParent;
+            TextBox t = new TextBox();
+            t.Text = "Ingrese texto";
+            f.Controls.Add(t);
+            f.ShowDialog();
+            Debug.WriteLine(f.DialogResult);
+            Debug.WriteLine(t.Text);
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -76,6 +83,7 @@ namespace musicAPP
             WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
             WMPLib.IWMPMedia media;
             openFileDialog1.Multiselect = true;
+            openFileDialog1.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.ALAC;*.WAV;*.AAC;*.MP3;"; // Valida tipo de archivo
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 foreach (string file in openFileDialog1.FileNames)
@@ -217,6 +225,11 @@ namespace musicAPP
             b2.ImageAlign = ContentAlignment.MiddleRight;
             b2.TextAlign = ContentAlignment.MiddleLeft;
             b2.BackColor = Color.White;
+            b2.Click += (object se, EventArgs ee) =>
+            {
+                CancionController.removeFile(ubicacion);
+                actualizarPanelesCanciones();
+            };
             b.Click += (object se, EventArgs ee) =>
             {
                 WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
@@ -238,10 +251,11 @@ namespace musicAPP
             FlowLayoutPanel p4 = new FlowLayoutPanel();
             p4.Size = new Size(415, 42);
             Label l = new Label();
-            l.Text = "Canciones";
+            int cantidadCanciones = CancionController.GetList().Count;
+            l.Text = cantidadCanciones+" cancion(es) encontrada(s)";
             l.Padding = new Padding(5);
-            l.Font = new Font("Microsoft Sans Serif", 20, FontStyle.Bold);
-            l.Size = new Size(200, 40);
+            l.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
+            l.Size = new Size(300, 40);
             p4.Controls.Add(l);
             FlowLayoutPanel p5 = new FlowLayoutPanel();
             p5.Size = new Size(159, 42);

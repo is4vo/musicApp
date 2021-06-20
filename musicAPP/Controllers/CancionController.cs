@@ -29,13 +29,32 @@ namespace musicAPP.Controllers
                     db.SaveChanges();
                 }
             }
-            catch (FileNotFoundException) { }
+            catch (Exception) { }
         }
 
         public static List<Cancion> GetList()
         {
             ModelContext db = new ModelContext();
             return db.Canciones.ToList();
+        }
+
+        public static bool removeFile(string path)
+        {
+            using (ModelContext db = new ModelContext())
+            {
+                var itemRemoved = db.Canciones.SingleOrDefault(c => c.Ubicacion == path);
+
+                if (itemRemoved != null)
+                {
+                    db.Canciones.Remove(itemRemoved);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }
