@@ -20,65 +20,30 @@ namespace musicAPP
         }
 
         /* Abrir buscador de archivos */
-        private void button1_Click(object sender, EventArgs e)
+        private void botonCanciones_Click(object sender, EventArgs e)
         {
-            actualizarPanelesCanciones();
+            iniciarlizarPanelesCanciones();
         }
 
-        private void actualizarPanelesCanciones()
+        private void iniciarlizarPanelesCanciones()
         {
-            flowLayoutPanel2.Controls.Clear();
-            crearCuadroSecciónCanciones();
-            flowLayoutPanel1.Controls.Clear();
+            tituloSeccion.Controls.Clear();
+            crearCuadroSeccionCanciones();
+            seccion.Controls.Clear();
             foreach (var cancion in CancionController.GetList())
             {
-                flowLayoutPanel1.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion));
+                seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, true));
             }
         }
 
         private void MusicApp_Load(object sender, EventArgs e)
         {
-                        
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btn_albunes_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_add_pls_Click(object sender, EventArgs e)
-        {
-            Form f = new Form();
-            f.StartPosition = FormStartPosition.CenterParent;
-            TextBox t = new TextBox();
-            t.Text = "Ingrese texto";
-            f.Controls.Add(t);
-            f.ShowDialog();
-            Debug.WriteLine(f.DialogResult);
-            Debug.WriteLine(t.Text);
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            Logo.Image = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\logo.png");
+            iniciarlizarPanelesPlaylist();
         }
 
         /* Agregar canciones a una Lista de reproduccion de Windows Media Player*/
-        private void button5_Click(object sender, EventArgs e)
+        private void CrearLista(object sender, EventArgs e)
         {
             WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
             WMPLib.IWMPMedia media;
@@ -96,79 +61,15 @@ namespace musicAPP
             axWindowsMediaPlayer1.Ctlcontrols.play();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel6_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private FlowLayoutPanel crearCuadroCancion(string titulo, string artista, double duracion, string album, string ubicacion)
+        private FlowLayoutPanel crearCuadroCancion(string titulo, string artista, double duracion, string album, string ubicacion, Boolean botonesActivos)
         {
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.BackColor = Color.DarkGray;
             p.Size = new Size(580, 80);
             p.BorderStyle = BorderStyle.Fixed3D;
-            p.Controls.Add(crearCuadroInformacion(titulo,artista,duracion, album));
-            p.Controls.Add(crearCuadroBotones(ubicacion));
+            p.Controls.Add(crearCuadroInformacion(titulo, artista, duracion, album));
+            if(botonesActivos)
+                p.Controls.Add(crearCuadroBotones(ubicacion));
             return p;
         }
 
@@ -207,38 +108,15 @@ namespace musicAPP
         private FlowLayoutPanel crearCuadroBotones(string ubicacion)
         {
             FlowLayoutPanel p3 = new FlowLayoutPanel();
-            Button b = new Button();
-            Button b2 = new Button();
-            b.Text = "Reproducir";
-            b.Font = new Font(b.Font, FontStyle.Bold);
-            b.BackColor = Color.White;
-            Image play = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\play.png");
-            b.Size = new Size(105, 30);
-            b.Image = (Image)(new Bitmap(play, new Size(20, 20)));
-            b.ImageAlign = ContentAlignment.MiddleRight;
-            b.TextAlign = ContentAlignment.MiddleLeft;
-            b2.Text = "Eliminar";
-            b2.Font = new Font(b2.Font, FontStyle.Bold);
-            Image delete = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\delete.png");
-            b2.Size = new Size(105, 30);
-            b2.Image = (Image)(new Bitmap(delete, new Size(20, 20)));
-            b2.ImageAlign = ContentAlignment.MiddleRight;
-            b2.TextAlign = ContentAlignment.MiddleLeft;
-            b2.BackColor = Color.White;
+            Button b = crearBotonReproducir(7, 105, 30);
+            Button b2 = crearBotonEliminar(7, 105, 30);
             b2.Click += (object se, EventArgs ee) =>
             {
-                CancionController.removeFile(ubicacion);
-                actualizarPanelesCanciones();
+                eliminarCancion(ubicacion);
             };
             b.Click += (object se, EventArgs ee) =>
             {
-                WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
-                WMPLib.IWMPMedia media;
-                media = axWindowsMediaPlayer1.newMedia(ubicacion);
-                playlist.appendItem(media);
-                axWindowsMediaPlayer1.currentPlaylist = playlist;
-                axWindowsMediaPlayer1.Ctlcontrols.play();
-
+                reproducirCancion(ubicacion);
             };
             p3.Size = new Size(130, 70);
             p3.Controls.Add(b);
@@ -246,20 +124,21 @@ namespace musicAPP
             return p3;
         }
 
-        private void crearCuadroSecciónCanciones()
+        private void crearCuadroSeccionCanciones()
         {
             FlowLayoutPanel p4 = new FlowLayoutPanel();
             p4.Size = new Size(415, 42);
             Label l = new Label();
             int cantidadCanciones = CancionController.GetList().Count;
-            l.Text = cantidadCanciones+" cancion(es) encontrada(s)";
-            l.Padding = new Padding(5);
+            l.Text = cantidadCanciones + " cancion(es) encontrada(s)";
+            l.Padding = new Padding(10);
             l.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
             l.Size = new Size(300, 40);
             p4.Controls.Add(l);
             FlowLayoutPanel p5 = new FlowLayoutPanel();
             p5.Size = new Size(159, 42);
             Button b = new Button();
+            ToolTip t = new ToolTip();
             b.Text = "+";
             b.BackColor = Color.Transparent;
             b.BackgroundImageLayout = ImageLayout.None;
@@ -267,32 +146,204 @@ namespace musicAPP
             b.Font = new Font("Microsoft Sans Serif", 20, FontStyle.Bold);
             b.Size = new Size(156, 39);
             b.FlatAppearance.BorderSize = 0;
+            t.SetToolTip(b, "Agregar nueva canción");
             b.Click += (object se, EventArgs ee) =>
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.ALAC;*.WAV;*.AAC;*.MP3;"; // Valida tipo de archivo
-                ofd.ShowDialog();
-                CancionController.SaveFile(ofd.FileName);
-                flowLayoutPanel1.Controls.Clear();
-                foreach (var cancion in CancionController.GetList())
-                {
-                    flowLayoutPanel1.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion));
-                }
-
+                agregarCancion();
             };
             p5.Controls.Add(b);
-            flowLayoutPanel2.Controls.Add(p4);
-            flowLayoutPanel2.Controls.Add(p5);
+            tituloSeccion.Controls.Add(p4);
+            tituloSeccion.Controls.Add(p5);
         }
 
-        private void label1_Click_3(object sender, EventArgs e)
+        public void agregarCancion()
         {
-
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.ALAC;*.WAV;*.AAC;*.MP3;"; // Valida tipo de archivo
+            ofd.ShowDialog();
+            CancionController.SaveFile(ofd.FileName);
+            iniciarlizarPanelesCanciones();
         }
 
-        private void label1_Click_4(object sender, EventArgs e)
+        public void eliminarCancion(string ubicacion)
         {
-
+            CancionController.removeFile(ubicacion);
+            iniciarlizarPanelesCanciones();
+            List<string> listasParaBorrar = new List<string>();
+            foreach (var playlistName in PlayListController.getAllPlayList())
+            {
+                if (PlayListController.getPlayList(playlistName).Count < 1)
+                    listasParaBorrar.Add(playlistName);
+            }
+            foreach (var listaName in listasParaBorrar)
+            {
+                PlayListController.removePlayList(listaName);
+            }
+            iniciarlizarPanelesPlaylist();
         }
-    }
+
+        public void reproducirCancion(string ubicacion)
+        {
+            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
+            WMPLib.IWMPMedia media;
+            media = axWindowsMediaPlayer1.newMedia(ubicacion);
+            playlist.appendItem(media);
+            axWindowsMediaPlayer1.currentPlaylist = playlist;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        private void agregarPlaylist_Click(object sender, EventArgs e)
+        {
+            AgregarPlaylist f = new AgregarPlaylist();
+            f.ShowDialog();
+            iniciarlizarPanelesPlaylist();
+        }
+
+        private void iniciarlizarPanelesPlaylist()
+        {
+            seccionPlaylist.Controls.Clear();
+            foreach (var playlist in PlayListController.getAllPlayList())
+            {
+                seccionPlaylist.Controls.Add(crearPanelPlaylist(playlist));
+            }
+        }
+
+        private Button crearPanelPlaylist(string nombre)
+        {
+            Button playlist = new Button();
+            playlist.Size = new Size(195, 40);
+            playlist.Text = "Playlist: " + nombre;
+            playlist.BackColor = Color.Black;
+            playlist.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+            playlist.ForeColor = Color.White;
+            playlist.TextAlign = ContentAlignment.MiddleLeft;
+            playlist.Click += (object se, EventArgs ee) =>
+            {
+                mostrarPlaylist(nombre);
+            };
+            return playlist;
+        }
+
+        private void mostrarPlaylist(string nombre)
+        {
+            tituloSeccion.Controls.Clear();
+            crearCuadroSeccionPlaylist(nombre);
+            seccion.Controls.Clear();
+            foreach (var playlist in PlayListController.getPlayList(nombre))
+            {
+                foreach (var cancion in CancionController.GetList())
+                {
+                    if(cancion.Ubicacion.Equals(playlist))
+                        seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, false));
+                }
+            }
+        }
+
+        private Button crearBotonReproducir(int tamanoLetra, int ancho, int alto)
+        {
+            Button reproducir = new Button();
+            reproducir.Text = "Reproducir";
+            reproducir.Font = new Font("Microsoft Sans Serif", tamanoLetra, FontStyle.Bold);
+            reproducir.BackColor = Color.White;
+            Image play = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\play.png");
+            reproducir.Size = new Size(ancho, alto);
+            reproducir.Image = (Image)(new Bitmap(play, new Size(20, 20)));
+            reproducir.ImageAlign = ContentAlignment.MiddleRight;
+            reproducir.TextAlign = ContentAlignment.MiddleLeft;
+            return reproducir;
+        }
+
+        private Button crearBotonEliminar(int tamanoLetra, int ancho, int alto)
+        {
+            Button eliminar = new Button();
+            eliminar.Text = "Eliminar";
+            eliminar.Font = new Font("Microsoft Sans Serif", tamanoLetra, FontStyle.Bold);
+            Image delete = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\delete.png");
+            eliminar.Size = new Size(ancho, alto);
+            eliminar.Image = (Image)(new Bitmap(delete, new Size(20, 20)));
+            eliminar.ImageAlign = ContentAlignment.MiddleRight;
+            eliminar.TextAlign = ContentAlignment.MiddleLeft;
+            eliminar.BackColor = Color.White;
+            return eliminar;
+        }
+
+        private void crearCuadroSeccionPlaylist(string nombre)
+        {
+            FlowLayoutPanel panelTitulos = new FlowLayoutPanel();
+            FlowLayoutPanel panel1 = new FlowLayoutPanel();
+            FlowLayoutPanel panel2 = new FlowLayoutPanel();
+            FlowLayoutPanel panel3 = new FlowLayoutPanel();
+            FlowLayoutPanel panel4 = new FlowLayoutPanel();
+            panelTitulos.Size = new Size(320, 52);
+            panel1.Size = new Size(300, 26);
+            panel2.Size = new Size(300, 26);
+            panel3.Size = new Size(125, 52);
+            panel4.Size = new Size(125, 52);
+            Label titulo1 = new Label();
+            Label titulo2 = new Label();
+            titulo1.Text = nombre;
+            titulo1.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
+            titulo1.Size = new Size(300, 26);
+            int cantidadCanciones = PlayListController.getPlayList(nombre).Count;
+            TimeSpan t = TimeSpan.FromSeconds(getTiempoTotalPlaylist(nombre));
+            titulo2.Text = "Contiene " + cantidadCanciones + " cancion(es) y dura " + t.ToString(@"mm") + " min. " + t.ToString(@"ss") + " s.";
+            titulo2.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+            titulo2.Size = new Size(300, 26);
+            panel1.Controls.Add(titulo1);
+            panel2.Controls.Add(titulo2);
+            panelTitulos.Controls.Add(panel1);
+            panelTitulos.Controls.Add(panel2);
+            Button botonReproducirPlaylist = crearBotonReproducir(9, 120, 40);
+            Button botonEliminarPlaylist = crearBotonEliminar(9, 120, 40);
+            botonReproducirPlaylist.Click += (object se, EventArgs ee) =>
+            {
+                reproducirPlaylist(nombre);
+            };
+            botonEliminarPlaylist.Click += (object se, EventArgs ee) =>
+            {
+                eliminarPlaylist(nombre);
+            };
+            panel3.Controls.Add(botonReproducirPlaylist);
+            panel4.Controls.Add(botonEliminarPlaylist);
+            tituloSeccion.Controls.Add(panelTitulos);
+            tituloSeccion.Controls.Add(panel3);
+            tituloSeccion.Controls.Add(panel4);
+        }
+
+        private void reproducirPlaylist(string nombre)
+        {
+            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist(nombre);
+            WMPLib.IWMPMedia media;
+            foreach (var song in PlayListController.getPlayList(nombre))
+            {
+                media = axWindowsMediaPlayer1.newMedia(song);
+                playlist.appendItem(media);
+            }
+            axWindowsMediaPlayer1.currentPlaylist = playlist;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        private void eliminarPlaylist(string nombre)
+        {
+            PlayListController.removePlayList(nombre);
+            iniciarlizarPanelesPlaylist();
+            tituloSeccion.Controls.Clear();
+            seccion.Controls.Clear();
+        }
+
+        private double getTiempoTotalPlaylist(string nombre)
+        {
+            double tiempoTotal = 0;
+            foreach (var playlist in PlayListController.getPlayList(nombre))
+            {
+                foreach (var cancion in CancionController.GetList())
+                {
+                    if (cancion.Ubicacion.Equals(playlist))
+                        tiempoTotal = tiempoTotal + cancion.Duracion;
+                }
+            }
+            return tiempoTotal;
+        }
+
+    }   
 }

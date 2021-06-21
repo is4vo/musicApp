@@ -127,6 +127,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\AgregarPlaylist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AgregarPlaylist.Designer.cs">
+      <DependentUpon>AgregarPlaylist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CancionController.cs" />
     <Compile Include="Controllers\PlayListController.cs" />
     <Compile Include="Migrations\202105131550518_Modifica-Modelo-Cancion.cs" />
@@ -150,6 +156,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Views\AgregarPlaylist.resx">
+      <DependentUpon>AgregarPlaylist.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105131550518_Modifica-Modelo-Cancion.resx">
       <DependentUpon>202105131550518_Modifica-Modelo-Cancion.cs</DependentUpon>
     </EmbeddedResource>

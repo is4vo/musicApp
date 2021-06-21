@@ -29,7 +29,7 @@ namespace musicAPP.Controllers
         {
             /* Obtiene PlayList */
             ModelContext db = new ModelContext();
-            if (db.PlayLists.Where(p => p.Nombre == name).Select(p => p.PlayListId) == null)
+            if (db.PlayLists.Where(p => p.Nombre == name).Select(p => p.PlayListId).FirstOrDefault() == 0)
             {
                 AddPlayList(name); // Crea la PlayList
             }
@@ -38,14 +38,14 @@ namespace musicAPP.Controllers
             /* Buscar si existe cancion en DB, sino agregar cancion a DB */
             foreach (String song in fileList.FileNames)
             {
-                if (db.Canciones.Where(s => s.Ubicacion == song).Select(s => s.CancionId) == null)
+                if (db.Canciones.Where(s => s.Ubicacion == song).Select(s => s.CancionId).FirstOrDefault() == 0)
                 {
                     CancionController.SaveFile(song); // Crea la cancion
                 }
                 int CancionId = db.Canciones.Where(s => s.Ubicacion == song).Select(s => s.CancionId).FirstOrDefault();
 
                 /* Agregando Canciones a PlayList */
-                if (db.CancionPlaylists.Where(d => d.CancionId == CancionId).Where(d => d.PlayListId == PlayListId) == null)
+                if (db.CancionPlaylists.Where(d => d.CancionId == CancionId).Where(d => d.PlayListId == PlayListId).FirstOrDefault() == null)
                 {
                     CancionPlaylist model = new CancionPlaylist();
                     model.CancionId = CancionId;
@@ -65,9 +65,10 @@ namespace musicAPP.Controllers
             foreach (int CancionId in db.CancionPlaylists.Where(p => p.PlayListId == PlayListId).Select(c => c.CancionId).ToList<int>())
             {
                 /* Se agregan las canciones a la cola de canciones */
-                PlayList.Add(db.Canciones.Where(c => c.CancionId == CancionId).Select(path => path.Ubicacion).FirstOrDefault());
+                string ubicacion = db.Canciones.Where(c => c.CancionId == CancionId).Select(path => path.Ubicacion).FirstOrDefault();
+                if(!string.IsNullOrEmpty(ubicacion))
+                    PlayList.Add(ubicacion);
             }
-
             return PlayList;
         }
 
