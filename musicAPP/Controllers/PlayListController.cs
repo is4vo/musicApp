@@ -75,7 +75,14 @@ namespace musicAPP.Controllers
         public static List<String> getAllPlayList()
         {
             ModelContext db = new ModelContext();
-            return db.PlayLists.Select(p => p.Nombre).ToList();
+            try
+            {
+                return db.PlayLists.Select(p => p.Nombre).ToList();
+            } catch (Exception)
+            {
+                return new List<string>();
+            }
+            
         }
 
         public static bool removePlayList(string name)

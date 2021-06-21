@@ -362,6 +362,25 @@ namespace musicAPP
         }
 
         /// <summary>
+        /// Crea un boton que dice agregar.
+        /// </summary>
+        /// <param name="tamanoLetra"> El tamaño de letra que tendra el boton </param>
+        /// <param name="ancho"> El ancho del boton </param>
+        /// <param name="alto"> El alto del boton </param>
+        /// <returns> El boton con creado con las medidas solicitadas </returns>
+        private Button crearBotonAgregar(int tamanoLetra, int ancho, int alto)
+        {
+            Button agregar = new Button();
+            agregar.Text = "Agregar";
+            agregar.Font = new Font("Microsoft Sans Serif", tamanoLetra, FontStyle.Bold);
+            agregar.Size = new Size(ancho, alto);
+            agregar.ImageAlign = ContentAlignment.MiddleRight;
+            agregar.TextAlign = ContentAlignment.MiddleLeft;
+            agregar.BackColor = Color.White;
+            return agregar;
+        }
+
+        /// <summary>
         /// Crea un panel que se compone por información de la playlist mas botonos para eliminar o reproducir dicha playlist.
         /// La información a mostrar de la playlist es el nombre, numero de canciones y tiempo de duración total.
         /// </summary>
@@ -373,27 +392,30 @@ namespace musicAPP
             FlowLayoutPanel panel2 = new FlowLayoutPanel();
             FlowLayoutPanel panel3 = new FlowLayoutPanel();
             FlowLayoutPanel panel4 = new FlowLayoutPanel();
-            panelTitulos.Size = new Size(320, 52);
-            panel1.Size = new Size(300, 26);
-            panel2.Size = new Size(300, 26);
-            panel3.Size = new Size(125, 52);
-            panel4.Size = new Size(125, 52);
+            FlowLayoutPanel panel5 = new FlowLayoutPanel();
+            panelTitulos.Size = new Size(290, 52);
+            panel1.Size = new Size(290, 26);
+            panel2.Size = new Size(290, 26);
+            panel3.Size = new Size(110, 52);
+            panel4.Size = new Size(100, 52);
+            panel5.Size = new Size(75, 52);
             Label titulo1 = new Label();
             Label titulo2 = new Label();
             titulo1.Text = nombre;
             titulo1.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
-            titulo1.Size = new Size(300, 26);
+            titulo1.Size = new Size(290, 26);
             int cantidadCanciones = PlayListController.getPlayList(nombre).Count;
             TimeSpan t = TimeSpan.FromSeconds(getTiempoTotalPlaylist(nombre));
             titulo2.Text = "Contiene " + cantidadCanciones + " cancion(es) y dura " + t.ToString(@"mm") + " min. " + t.ToString(@"ss") + " s.";
             titulo2.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
-            titulo2.Size = new Size(300, 26);
+            titulo2.Size = new Size(290, 26);
             panel1.Controls.Add(titulo1);
             panel2.Controls.Add(titulo2);
             panelTitulos.Controls.Add(panel1);
             panelTitulos.Controls.Add(panel2);
-            Button botonReproducirPlaylist = crearBotonReproducir(9, 120, 40);
-            Button botonEliminarPlaylist = crearBotonEliminar(9, 120, 40);
+            Button botonReproducirPlaylist = crearBotonReproducir(9, 105, 40);
+            Button botonEliminarPlaylist = crearBotonEliminar(9, 95, 40);
+            Button botonAgregarPlayList = crearBotonAgregar(9, 70, 40);
             /* Al clickear este boton se reproduce la playlist */
             botonReproducirPlaylist.Click += (object se, EventArgs ee) =>
             {
@@ -404,11 +426,20 @@ namespace musicAPP
             {
                 eliminarPlaylist(nombre);
             };
+            botonAgregarPlayList.Click += (object se, EventArgs ee) =>
+            {
+                AgregarPlaylist f = new AgregarPlaylist(nombre);
+                f.ShowDialog();
+                iniciarlizarPanelesPlaylist();
+                mostrarPlaylist(nombre);
+            };
             panel3.Controls.Add(botonReproducirPlaylist);
             panel4.Controls.Add(botonEliminarPlaylist);
+            panel5.Controls.Add(botonAgregarPlayList);
             tituloSeccion.Controls.Add(panelTitulos);
             tituloSeccion.Controls.Add(panel3);
             tituloSeccion.Controls.Add(panel4);
+            tituloSeccion.Controls.Add(panel5);
         }
 
         /// <summary>

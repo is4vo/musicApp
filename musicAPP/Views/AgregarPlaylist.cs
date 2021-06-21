@@ -19,9 +19,23 @@ namespace musicAPP
     public partial class AgregarPlaylist : Form
     {
         private bool SubirCancionesClickeado = false;
+        private String name;
         public AgregarPlaylist()
         {
             InitializeComponent();
+        }
+
+        public AgregarPlaylist(String name)
+        {
+            this.name = name;
+            if (name.Length != 0)
+            {
+                InitializeComponent(name);
+            }
+            else
+            {
+                InitializeComponent();
+            }
         }
 
         /// <summary>

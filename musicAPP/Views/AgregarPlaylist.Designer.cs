@@ -27,7 +27,7 @@ namespace musicAPP
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(string name = "")
         {
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.botonCanciones = new System.Windows.Forms.Button();
@@ -110,12 +110,27 @@ namespace musicAPP
             // 
             // inputNombrePlaylist
             // 
-            this.inputNombrePlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputNombrePlaylist.Location = new System.Drawing.Point(95, 15);
-            this.inputNombrePlaylist.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-            this.inputNombrePlaylist.Name = "inputNombrePlaylist";
-            this.inputNombrePlaylist.Size = new System.Drawing.Size(174, 26);
-            this.inputNombrePlaylist.TabIndex = 1;
+            if (name.Equals(""))
+            {
+                this.inputNombrePlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.inputNombrePlaylist.Location = new System.Drawing.Point(95, 15);
+                this.inputNombrePlaylist.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+                this.inputNombrePlaylist.Name = "inputNombrePlaylist";
+                this.inputNombrePlaylist.Size = new System.Drawing.Size(174, 26);
+                this.inputNombrePlaylist.TabIndex = 1;
+            }
+            else
+            {
+                this.inputNombrePlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.inputNombrePlaylist.Location = new System.Drawing.Point(95, 15);
+                this.inputNombrePlaylist.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+                this.inputNombrePlaylist.Name = "inputNombrePlaylist";
+                this.inputNombrePlaylist.Size = new System.Drawing.Size(174, 26);
+                this.inputNombrePlaylist.TabIndex = 1;
+                this.inputNombrePlaylist.Text = name;
+                this.inputNombrePlaylist.Enabled = false;
+            }
+            
             // 
             // flowLayoutPanel5
             // 

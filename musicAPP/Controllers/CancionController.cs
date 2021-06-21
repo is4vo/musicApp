@@ -35,7 +35,13 @@ namespace musicAPP.Controllers
         public static List<Cancion> GetList()
         {
             ModelContext db = new ModelContext();
-            return db.Canciones.ToList();
+            try
+            {
+                return db.Canciones.ToList();
+            }
+            catch (Exception) {
+                return new List<Cancion>();
+            }
         }
 
         public static bool removeFile(string path)
