@@ -180,11 +180,12 @@ namespace musicAPP
                 PlayListController.removePlayList(listaName);
             }
             iniciarlizarPanelesPlaylist();
+            eliminarCancionDeWindowsMediaPlayer(ubicacion);
         }
 
         public void reproducirCancion(string ubicacion)
         {
-            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("La Lista");
+            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("cancion");
             WMPLib.IWMPMedia media;
             media = axWindowsMediaPlayer1.newMedia(ubicacion);
             playlist.appendItem(media);
@@ -329,6 +330,7 @@ namespace musicAPP
             iniciarlizarPanelesPlaylist();
             tituloSeccion.Controls.Clear();
             seccion.Controls.Clear();
+            eliminarPlaylistDeWindowsMediaPlayer(nombre);
         }
 
         private double getTiempoTotalPlaylist(string nombre)
@@ -345,5 +347,24 @@ namespace musicAPP
             return tiempoTotal;
         }
 
+        private void eliminarCancionDeWindowsMediaPlayer(string ubicacion)
+        {
+            WMPLib.IWMPPlaylist pl = axWindowsMediaPlayer1.currentPlaylist;
+            for (int i = 0; i < pl.count; i++)
+            {
+                if (pl.get_Item(i).sourceURL.Equals(ubicacion))
+                    pl.removeItem(pl.get_Item(i));
+            }
+        }
+
+        private void eliminarPlaylistDeWindowsMediaPlayer(string nombre)
+        {
+            WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("cancion");
+            WMPLib.IWMPMedia media;
+            media = axWindowsMediaPlayer1.newMedia(null);
+            playlist.appendItem(media);
+            axWindowsMediaPlayer1.currentPlaylist = playlist;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
     }   
 }
