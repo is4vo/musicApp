@@ -27,7 +27,7 @@ namespace musicAPP
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(string name = "")
+        private void InitializeComponent()
         {
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.botonCanciones = new System.Windows.Forms.Button();
@@ -63,17 +63,18 @@ namespace musicAPP
             // 
             // botonCanciones
             // 
-            this.botonCanciones.BackColor = System.Drawing.Color.Black;
-            this.botonCanciones.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.botonCanciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
+            this.botonCanciones.Cursor = System.Windows.Forms.Cursors.Default;
             this.botonCanciones.Dock = System.Windows.Forms.DockStyle.Top;
             this.botonCanciones.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.botonCanciones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.botonCanciones.FlatAppearance.BorderSize = 0;
+            this.botonCanciones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.botonCanciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botonCanciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.botonCanciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
             this.botonCanciones.Location = new System.Drawing.Point(3, 3);
             this.botonCanciones.Name = "botonCanciones";
-            this.botonCanciones.Size = new System.Drawing.Size(300, 38);
+            this.botonCanciones.Size = new System.Drawing.Size(280, 38);
             this.botonCanciones.TabIndex = 6;
             this.botonCanciones.Text = "Agrear nueva playlist";
             this.botonCanciones.UseVisualStyleBackColor = false;
@@ -90,6 +91,7 @@ namespace musicAPP
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.label2);
+            this.flowLayoutPanel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(86, 53);
@@ -110,27 +112,12 @@ namespace musicAPP
             // 
             // inputNombrePlaylist
             // 
-            if (name.Equals(""))
-            {
-                this.inputNombrePlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.inputNombrePlaylist.Location = new System.Drawing.Point(95, 15);
-                this.inputNombrePlaylist.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-                this.inputNombrePlaylist.Name = "inputNombrePlaylist";
-                this.inputNombrePlaylist.Size = new System.Drawing.Size(174, 26);
-                this.inputNombrePlaylist.TabIndex = 1;
-            }
-            else
-            {
-                this.inputNombrePlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.inputNombrePlaylist.Location = new System.Drawing.Point(95, 15);
-                this.inputNombrePlaylist.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
-                this.inputNombrePlaylist.Name = "inputNombrePlaylist";
-                this.inputNombrePlaylist.Size = new System.Drawing.Size(174, 26);
-                this.inputNombrePlaylist.TabIndex = 1;
-                this.inputNombrePlaylist.Text = name;
-                this.inputNombrePlaylist.Enabled = false;
-            }
-            
+            this.inputNombrePlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputNombrePlaylist.Location = new System.Drawing.Point(95, 15);
+            this.inputNombrePlaylist.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.inputNombrePlaylist.Name = "inputNombrePlaylist";
+            this.inputNombrePlaylist.Size = new System.Drawing.Size(174, 26);
+            this.inputNombrePlaylist.TabIndex = 1;
             // 
             // flowLayoutPanel5
             // 
@@ -151,19 +138,25 @@ namespace musicAPP
             // 
             // SubirCancionesPlaylist
             // 
+            this.SubirCancionesPlaylist.BackColor = System.Drawing.Color.White;
+            this.SubirCancionesPlaylist.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SubirCancionesPlaylist.FlatAppearance.BorderSize = 0;
+            this.SubirCancionesPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SubirCancionesPlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubirCancionesPlaylist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.SubirCancionesPlaylist.Location = new System.Drawing.Point(3, 3);
             this.SubirCancionesPlaylist.Name = "SubirCancionesPlaylist";
             this.SubirCancionesPlaylist.Size = new System.Drawing.Size(139, 50);
             this.SubirCancionesPlaylist.TabIndex = 0;
             this.SubirCancionesPlaylist.Text = "Subir canciones";
-            this.SubirCancionesPlaylist.UseVisualStyleBackColor = true;
+            this.SubirCancionesPlaylist.UseVisualStyleBackColor = false;
             this.SubirCancionesPlaylist.Click += new System.EventHandler(this.SubirCancionesPlaylist_Click);
             // 
             // cantidadArchivos
             // 
             this.cantidadArchivos.AutoSize = true;
             this.cantidadArchivos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cantidadArchivos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.cantidadArchivos.Location = new System.Drawing.Point(168, 20);
             this.cantidadArchivos.Margin = new System.Windows.Forms.Padding(20, 20, 3, 0);
             this.cantidadArchivos.Name = "cantidadArchivos";
@@ -181,7 +174,12 @@ namespace musicAPP
             // 
             // CrearPlaylist
             // 
+            this.CrearPlaylist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
+            this.CrearPlaylist.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CrearPlaylist.FlatAppearance.BorderSize = 0;
+            this.CrearPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CrearPlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CrearPlaylist.ForeColor = System.Drawing.Color.White;
             this.CrearPlaylist.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.CrearPlaylist.Location = new System.Drawing.Point(3, 50);
             this.CrearPlaylist.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
@@ -189,7 +187,7 @@ namespace musicAPP
             this.CrearPlaylist.Size = new System.Drawing.Size(275, 33);
             this.CrearPlaylist.TabIndex = 0;
             this.CrearPlaylist.Text = "Aceptar";
-            this.CrearPlaylist.UseVisualStyleBackColor = true;
+            this.CrearPlaylist.UseVisualStyleBackColor = false;
             this.CrearPlaylist.Click += new System.EventHandler(this.CrearPlaylist_Click);
             // 
             // openFileDialog1
@@ -198,6 +196,7 @@ namespace musicAPP
             // 
             // AgregarPlaylist
             // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.flowLayoutPanel2);
             this.MaximizeBox = false;
@@ -207,6 +206,7 @@ namespace musicAPP
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Agregar playlist";
+            this.Load += new System.EventHandler(this.AgregarPlaylist_Load);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
@@ -231,11 +231,11 @@ namespace musicAPP
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox inputNombrePlaylist;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.Button SubirCancionesPlaylist;
         private System.Windows.Forms.Label cantidadArchivos;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
         private System.Windows.Forms.Button CrearPlaylist;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.Button SubirCancionesPlaylist;
     }
 }

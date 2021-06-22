@@ -77,7 +77,7 @@ namespace musicAPP
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.panel4.BackColor = System.Drawing.SystemColors.Control;
             this.panel4.Controls.Add(this.seccionPlaylist);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -106,15 +106,15 @@ namespace musicAPP
             // 
             // agregarPlaylist
             // 
-            this.agregarPlaylist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.agregarPlaylist.BackColor = System.Drawing.SystemColors.Control;
             this.agregarPlaylist.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.agregarPlaylist.Cursor = System.Windows.Forms.Cursors.Hand;
             this.agregarPlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
             this.agregarPlaylist.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.agregarPlaylist.FlatAppearance.BorderSize = 0;
             this.agregarPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.agregarPlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
-            this.agregarPlaylist.ForeColor = System.Drawing.Color.Black;
+            this.agregarPlaylist.Font = new System.Drawing.Font("Microsoft Sans Serif", 23F, System.Drawing.FontStyle.Bold);
+            this.agregarPlaylist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.agregarPlaylist.Location = new System.Drawing.Point(167, 0);
             this.agregarPlaylist.Name = "agregarPlaylist";
             this.agregarPlaylist.Size = new System.Drawing.Size(70, 61);
@@ -126,10 +126,10 @@ namespace musicAPP
             // 
             // label_playlist
             // 
-            this.label_playlist.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.label_playlist.BackColor = System.Drawing.SystemColors.Control;
             this.label_playlist.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_playlist.ForeColor = System.Drawing.Color.Black;
+            this.label_playlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_playlist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.label_playlist.Location = new System.Drawing.Point(0, 0);
             this.label_playlist.Name = "label_playlist";
             this.label_playlist.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -140,7 +140,7 @@ namespace musicAPP
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
             this.panel3.Controls.Add(this.Logo);
             this.panel3.Controls.Add(this.botonCanciones);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -159,14 +159,15 @@ namespace musicAPP
             // 
             // botonCanciones
             // 
-            this.botonCanciones.BackColor = System.Drawing.Color.Black;
+            this.botonCanciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.botonCanciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.botonCanciones.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.botonCanciones.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.botonCanciones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.botonCanciones.FlatAppearance.BorderSize = 0;
+            this.botonCanciones.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(177)))), ((int)(((byte)(245)))));
             this.botonCanciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botonCanciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonCanciones.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.botonCanciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonCanciones.ForeColor = System.Drawing.Color.White;
             this.botonCanciones.Location = new System.Drawing.Point(0, 194);
             this.botonCanciones.Name = "botonCanciones";
             this.botonCanciones.Size = new System.Drawing.Size(237, 38);
@@ -189,6 +190,7 @@ namespace musicAPP
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel2.Controls.Add(this.tituloSeccion);
             this.panel2.Controls.Add(this.seccion);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -199,6 +201,7 @@ namespace musicAPP
             // 
             // tituloSeccion
             // 
+            this.tituloSeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
             this.tituloSeccion.Location = new System.Drawing.Point(16, 6);
             this.tituloSeccion.Name = "tituloSeccion";
             this.tituloSeccion.Size = new System.Drawing.Size(619, 55);

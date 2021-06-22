@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
+﻿using musicAPP.Controllers;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using musicAPP.Controllers;
 
 namespace musicAPP
 {
@@ -23,19 +16,6 @@ namespace musicAPP
         public AgregarPlaylist()
         {
             InitializeComponent();
-        }
-
-        public AgregarPlaylist(String name)
-        {
-            this.name = name;
-            if (name.Length != 0)
-            {
-                InitializeComponent(name);
-            }
-            else
-            {
-                InitializeComponent();
-            }
         }
 
         /// <summary>
@@ -71,6 +51,15 @@ namespace musicAPP
                 PlayListController.AddSong(openFileDialog1, inputNombrePlaylist.Text);
                 this.Close();
             }
+        }
+
+        private void AgregarPlaylist_Load(object sender, EventArgs e)
+        {
+            
+            Image delete = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\addSong.png");
+            SubirCancionesPlaylist.Image = (Image)(new Bitmap(delete, new Size(25, 25)));
+            SubirCancionesPlaylist.ImageAlign = ContentAlignment.MiddleRight;
+            SubirCancionesPlaylist.TextAlign = ContentAlignment.MiddleLeft;
         }
     }
 }

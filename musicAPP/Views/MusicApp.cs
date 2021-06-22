@@ -56,6 +56,7 @@ namespace musicAPP
             /* Se pone la imagen del logo en el espacio asignado. */
             Logo.Image = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\logo.png");
             iniciarlizarPanelesPlaylist();
+            iniciarlizarPanelesCanciones();
         }
 
         /// <summary>
@@ -72,9 +73,9 @@ namespace musicAPP
         private FlowLayoutPanel crearCuadroCancion(string titulo, string artista, double duracion, string album, string ubicacion, Boolean botonesActivos)
         {
             FlowLayoutPanel p = new FlowLayoutPanel();
-            p.BackColor = Color.DarkGray;
+            p.BackColor = SystemColors.Control;
             p.Size = new Size(580, 80);
-            p.BorderStyle = BorderStyle.Fixed3D;
+            p.BorderStyle = BorderStyle.None;
             p.Controls.Add(crearCuadroInformacion(titulo, artista, duracion, album));
             if(botonesActivos)
                 p.Controls.Add(crearCuadroBotones(ubicacion));
@@ -94,12 +95,16 @@ namespace musicAPP
         {
             FlowLayoutPanel p2 = new FlowLayoutPanel();
             Label l = new Label();
+            l.ForeColor = Color.FromArgb(75, 108, 231);
             Label l2 = new Label();
+            l2.ForeColor = SystemColors.ControlDarkDark;
             Label l3 = new Label();
+            l3.ForeColor = SystemColors.ControlDarkDark;
             Label l4 = new Label();
+            l4.ForeColor = SystemColors.ControlDarkDark;
             if (titulo == null || titulo.Equals(""))
             {
-                l.Text = "Título: Sin título";
+                l.Text = "Título: Sin título";  
             }
             else
             {
@@ -114,7 +119,7 @@ namespace musicAPP
             l3.Size = new Size(350, 18);
             l4.Text = "Album: " + album;
             l4.Size = new Size(350, 18);
-            p2.Size = new Size(420, 70);
+            p2.Size = new Size(455, 70);
             p2.Controls.Add(l);
             p2.Controls.Add(l2);
             p2.Controls.Add(l3);
@@ -143,7 +148,7 @@ namespace musicAPP
             {
                 reproducirCancion(ubicacion);
             };
-            p3.Size = new Size(130, 70);
+            p3.Size = new Size(113, 70);
             p3.Controls.Add(b);
             p3.Controls.Add(b2);
             return p3;
@@ -162,8 +167,8 @@ namespace musicAPP
             Label l = new Label();
             int cantidadCanciones = CancionController.GetList().Count;
             l.Text = cantidadCanciones + " cancion(es) encontrada(s)";
-            l.Padding = new Padding(10);
-            l.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
+            l.Margin = new Padding(0, 15, 0, 0);
+            l.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             l.Size = new Size(300, 40);
             p4.Controls.Add(l);
             FlowLayoutPanel p5 = new FlowLayoutPanel();
@@ -174,7 +179,7 @@ namespace musicAPP
             b.BackColor = Color.Transparent;
             b.BackgroundImageLayout = ImageLayout.None;
             b.FlatStyle = FlatStyle.Flat;
-            b.Font = new Font("Microsoft Sans Serif", 20, FontStyle.Bold);
+            b.Font = new Font("Microsoft Sans Serif", 23, FontStyle.Bold);
             b.Size = new Size(156, 39);
             b.FlatAppearance.BorderSize = 0;
             t.SetToolTip(b, "Agregar nueva canción");
@@ -285,9 +290,11 @@ namespace musicAPP
         private Button crearPanelPlaylist(string nombre)
         {
             Button playlist = new Button();
-            playlist.Size = new Size(195, 40);
+            playlist.Size = new Size(196, 40);
             playlist.Text = "Playlist: " + nombre;
-            playlist.BackColor = Color.Black;
+            playlist.BackColor = Color.FromArgb(75, 108, 231);
+            playlist.FlatStyle = FlatStyle.Flat;
+            playlist.FlatAppearance.BorderSize = 0;
             playlist.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
             playlist.ForeColor = Color.White;
             playlist.TextAlign = ContentAlignment.MiddleLeft;
@@ -296,6 +303,7 @@ namespace musicAPP
             {
                 mostrarPlaylist(nombre);
             };
+            playlist.FlatAppearance.MouseOverBackColor = Color.FromArgb(145, 177, 245);
             return playlist;
         }
 
@@ -330,13 +338,17 @@ namespace musicAPP
         {
             Button reproducir = new Button();
             reproducir.Text = "Reproducir";
+            reproducir.ForeColor = Color.White;
             reproducir.Font = new Font("Microsoft Sans Serif", tamanoLetra, FontStyle.Bold);
-            reproducir.BackColor = Color.White;
+            reproducir.BackColor = Color.FromArgb(75, 108, 231);
             Image play = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\play.png");
             reproducir.Size = new Size(ancho, alto);
             reproducir.Image = (Image)(new Bitmap(play, new Size(20, 20)));
             reproducir.ImageAlign = ContentAlignment.MiddleRight;
             reproducir.TextAlign = ContentAlignment.MiddleLeft;
+            reproducir.FlatStyle = FlatStyle.Flat;
+            reproducir.FlatAppearance.BorderSize = 0;
+            reproducir.FlatAppearance.MouseOverBackColor = Color.FromArgb(145, 177, 245);
             return reproducir;
         }
 
@@ -351,6 +363,7 @@ namespace musicAPP
         {
             Button eliminar = new Button();
             eliminar.Text = "Eliminar";
+            eliminar.ForeColor = Color.FromArgb(75, 108, 231);
             eliminar.Font = new Font("Microsoft Sans Serif", tamanoLetra, FontStyle.Bold);
             Image delete = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\delete.png");
             eliminar.Size = new Size(ancho, alto);
@@ -358,6 +371,8 @@ namespace musicAPP
             eliminar.ImageAlign = ContentAlignment.MiddleRight;
             eliminar.TextAlign = ContentAlignment.MiddleLeft;
             eliminar.BackColor = Color.White;
+            eliminar.FlatStyle = FlatStyle.Flat;
+            eliminar.FlatAppearance.BorderSize = 0;
             return eliminar;
         }
 
@@ -377,11 +392,15 @@ namespace musicAPP
             agregar.ImageAlign = ContentAlignment.MiddleRight;
             agregar.TextAlign = ContentAlignment.MiddleLeft;
             agregar.BackColor = Color.White;
+            agregar.FlatStyle = FlatStyle.Flat;
+            agregar.FlatAppearance.BorderSize = 0;
+            Image add = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\addSong.png");
+            agregar.Image = (Image)(new Bitmap(add, new Size(20, 20)));
             return agregar;
         }
 
         /// <summary>
-        /// Crea un panel que se compone por información de la playlist mas botonos para eliminar o reproducir dicha playlist.
+        /// Crea un panel que se compone por información de la playlist mas botonos para eliminar, agregar cancion y reproducir dicha playlist.
         /// La información a mostrar de la playlist es el nombre, numero de canciones y tiempo de duración total.
         /// </summary>
         /// <param name="nombre"> El nombre de la playlist </param>
@@ -393,29 +412,35 @@ namespace musicAPP
             FlowLayoutPanel panel3 = new FlowLayoutPanel();
             FlowLayoutPanel panel4 = new FlowLayoutPanel();
             FlowLayoutPanel panel5 = new FlowLayoutPanel();
-            panelTitulos.Size = new Size(290, 52);
-            panel1.Size = new Size(290, 26);
-            panel2.Size = new Size(290, 26);
-            panel3.Size = new Size(110, 52);
-            panel4.Size = new Size(100, 52);
-            panel5.Size = new Size(75, 52);
+            panelTitulos.Size = new Size(280, 52);
+            panel1.Size = new Size(280, 26);
+            panel2.Size = new Size(280, 26);
+            panel3.Size = new Size(108, 52);
+            panel4.Size = new Size(87, 52);
+            panel5.Size = new Size(87, 52);
             Label titulo1 = new Label();
             Label titulo2 = new Label();
             titulo1.Text = nombre;
-            titulo1.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
+            titulo1.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
             titulo1.Size = new Size(290, 26);
             int cantidadCanciones = PlayListController.getPlayList(nombre).Count;
             TimeSpan t = TimeSpan.FromSeconds(getTiempoTotalPlaylist(nombre));
             titulo2.Text = "Contiene " + cantidadCanciones + " cancion(es) y dura " + t.ToString(@"mm") + " min. " + t.ToString(@"ss") + " s.";
-            titulo2.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
+            titulo2.Font = new Font("Microsoft Sans Serif", 9, FontStyle.Regular);
             titulo2.Size = new Size(290, 26);
             panel1.Controls.Add(titulo1);
             panel2.Controls.Add(titulo2);
             panelTitulos.Controls.Add(panel1);
             panelTitulos.Controls.Add(panel2);
             Button botonReproducirPlaylist = crearBotonReproducir(9, 105, 40);
-            Button botonEliminarPlaylist = crearBotonEliminar(9, 95, 40);
-            Button botonAgregarPlayList = crearBotonAgregar(9, 70, 40);
+            Button botonEliminarPlaylist = crearBotonEliminar(9, 85, 40);
+            Button botonAgregarPlayList = crearBotonAgregar(9, 85, 40);
+            ToolTip tBotonReproducir = new ToolTip();
+            ToolTip tBotonEliminar = new ToolTip();
+            ToolTip tBotonAgregar = new ToolTip();
+            tBotonReproducir.SetToolTip(botonReproducirPlaylist, "Reproducir Playlist");
+            tBotonEliminar.SetToolTip(botonEliminarPlaylist, "Eliminar Playlist");
+            tBotonAgregar.SetToolTip(botonAgregarPlayList, "Agregar canción a Playlist");
             /* Al clickear este boton se reproduce la playlist */
             botonReproducirPlaylist.Click += (object se, EventArgs ee) =>
             {
@@ -428,10 +453,7 @@ namespace musicAPP
             };
             botonAgregarPlayList.Click += (object se, EventArgs ee) =>
             {
-                AgregarPlaylist f = new AgregarPlaylist(nombre);
-                f.ShowDialog();
-                iniciarlizarPanelesPlaylist();
-                mostrarPlaylist(nombre);
+                agregarCanciónAPlaylist(nombre);
             };
             panel3.Controls.Add(botonReproducirPlaylist);
             panel4.Controls.Add(botonEliminarPlaylist);
@@ -527,6 +549,45 @@ namespace musicAPP
                 playlist.appendItem(media);
                 axWindowsMediaPlayer1.currentPlaylist = playlist;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
+        }
+
+        /// <summary>
+        /// Se encarga de agregar una o mas canciones a una playlist ya existente.
+        /// Para ello se abre el seleccionador de archivos y el usuario escoge los
+        /// archivos a agregar.
+        /// </summary>
+        /// <param name="nombre"> El nombre de la playlist </param>
+        private void agregarCanciónAPlaylist(string nombre)
+        {
+            openFileDialog1.Multiselect = true;
+            openFileDialog1.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.ALAC;*.WAV;*.AAC;*.MP3;"; // Valida tipo de archivo
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                PlayListController.AddSong(openFileDialog1, nombre);
+                mostrarPlaylist(nombre);
+                foreach (string song in openFileDialog1.FileNames)
+                {
+                    actualizarPlaylist(nombre, song);
+                }
+            }
+            
+        }
+
+        /// <summary>
+        /// Se utiliza para actualizar la lista que se esta reproduciendo en el
+        /// window media plater en caso de que a esa lista se le haya agregado
+        /// una canción.
+        /// </summary>
+        /// <param name="nombre"> El nombre de la playlist </param>
+        /// <param name="song"> La path en la cual se encuentra la canción dentro del computador </param>
+        private void actualizarPlaylist(string nombre, string song) 
+        {
+            if (axWindowsMediaPlayer1.currentPlaylist.name.Equals(nombre))
+            {
+                WMPLib.IWMPMedia media;
+                media = axWindowsMediaPlayer1.newMedia(song);
+                axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
             }
         }
     }   
