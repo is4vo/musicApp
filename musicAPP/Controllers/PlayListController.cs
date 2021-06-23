@@ -6,9 +6,16 @@ using System.Windows.Forms;
 
 namespace musicAPP.Controllers
 {
+    /// <summary>
+    /// Permite conectar la vista con el modelo de PlayList
+    /// </summary>
     class PlayListController
     {
 
+        /// <summary>
+        /// Permite agregar una nueva PlayList a la BD
+        /// </summary>
+        /// <param name="name"> Nombre UNICO de la PLayList </param>
         public static void AddPlayList(String name)
         {
             PlayList model = new PlayList();
@@ -25,6 +32,11 @@ namespace musicAPP.Controllers
 
         }
 
+        /// <summary>
+        /// Permite agregar canciones existentes a una PlayList existente y crea las entidades no existentes en la BD
+        /// </summary>
+        /// <param name="fileList"> Componente que contiene lista de path de archivos seleccionados </param>
+        /// <param name="name"> Nombre de la PlayList </param>
         public static void AddSong(OpenFileDialog fileList, String name)
         {
             /* Obtiene PlayList */
@@ -56,6 +68,11 @@ namespace musicAPP.Controllers
             }
         }
 
+        /// <summary>
+        /// Permite obtener el listado de canciones asociado a una PlayList
+        /// </summary>
+        /// <param name="name"> Nombre de la PlayList existente </param>
+        /// <returns>Lista de Canciones</returns>
         public static List<String> getPlayList(String name)
         {
             ModelContext db = new ModelContext();
@@ -72,6 +89,10 @@ namespace musicAPP.Controllers
             return PlayList;
         }
 
+        /// <summary>
+        /// Permite obtener el listado de PlayList existentes.
+        /// </summary>
+        /// <returns>Lista de PlayLists</returns>
         public static List<String> getAllPlayList()
         {
             ModelContext db = new ModelContext();
@@ -85,6 +106,11 @@ namespace musicAPP.Controllers
             
         }
 
+        /// <summary>
+        /// Permite eliminar una PlayList desde la base de datos
+        /// </summary>
+        /// <param name="name"> Nombre de la PlayList que será eliminada </param>
+        /// <returns>true: se eliminó; false: error</returns>
         public static bool removePlayList(string name)
         {
             using (ModelContext db = new ModelContext())

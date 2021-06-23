@@ -6,9 +6,16 @@ using System.Linq;
 
 namespace musicAPP.Controllers
 {
+    /// <summary>
+    /// Esta Clase permite conectar la vista con el modelo de canciones.
+    /// </summary>
     public class CancionController
     {
 
+        /// <summary>
+        /// Permite guardar un archivo multimedia en la base de datos
+        /// </summary>
+        /// <param name="path"> Ubicación del archivo </param>
         public static void SaveFile(string path)
         {
             Cancion model = new Cancion();
@@ -32,6 +39,10 @@ namespace musicAPP.Controllers
             catch (Exception) { }
         }
 
+        /// <summary>
+        /// Permite obtener la lista completa de canciones en la BD
+        /// </summary>
+        /// <returns>Lista de Canciones</returns>
         public static List<Cancion> GetList()
         {
             ModelContext db = new ModelContext();
@@ -44,6 +55,11 @@ namespace musicAPP.Controllers
             }
         }
 
+        /// <summary>
+        /// Permite eliminar una canción de la base de datos.
+        /// </summary>
+        /// <param name="path"> Ubicación del archivo que será eliminado </param>
+        /// <returns>true: se eliminó; false: error</returns>
         public static bool removeFile(string path)
         {
             using (ModelContext db = new ModelContext())
