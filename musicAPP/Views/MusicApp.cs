@@ -42,7 +42,7 @@ namespace musicAPP
             /* En el panel "seccion" se crea un panel con información por cada canción*/
             foreach (var cancion in CancionController.GetList())
             {
-                seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, true));
+                seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, cancion.Generos, cancion.Compositores, true));
             }
         }
 
@@ -70,15 +70,23 @@ namespace musicAPP
         /// <param name="ubicacion"> La path en la cual se encuentra la canción dentro del computador </param>
         /// <param name="botonesActivos"> Indicador de si los botonos deben aparecer o no (en caso de listar canciones de playlista se esconden) </param>
         /// <returns> El panel con todos los componentes e información necesaria </returns>
-        private FlowLayoutPanel crearCuadroCancion(string titulo, string artista, double duracion, string album, string ubicacion, Boolean botonesActivos)
+        private FlowLayoutPanel crearCuadroCancion(string titulo, string artista, double duracion, string album, string ubicacion, string genero, string compositores, Boolean botonesActivos)
         {
             FlowLayoutPanel p = new FlowLayoutPanel();
             p.BackColor = SystemColors.Control;
-            p.Size = new Size(580, 80);
+            //p.Size = new Size(580, 80);
+            p.AutoSize = true;
             p.BorderStyle = BorderStyle.None;
-            p.Controls.Add(crearCuadroInformacion(titulo, artista, duracion, album));
-            if(botonesActivos)
+            p.Controls.Add(crearCuadroInformacion(titulo, artista, duracion, album, genero, compositores));;
+            if (botonesActivos)
+            {
                 p.Controls.Add(crearCuadroBotones(ubicacion));
+            } else
+            {
+                FlowLayoutPanel x = new FlowLayoutPanel();
+                x.Size = new Size(200, 0);
+                p.Controls.Add(x);
+            }
             return p;
         }
 
@@ -91,7 +99,7 @@ namespace musicAPP
         /// <param name="duracion"> La duración en segundos de la canción </param>
         /// <param name="album"> El album al cual pertenece la canción </param>
         /// <returns> El panel con todos los componentes e información necesaria </returns>
-        private FlowLayoutPanel crearCuadroInformacion(string titulo, string artista, double duracion, string album)
+        private FlowLayoutPanel crearCuadroInformacion(string titulo, string artista, double duracion, string album, string genero, string compositores)
         {
             FlowLayoutPanel p2 = new FlowLayoutPanel();
             Label l = new Label();
@@ -102,9 +110,13 @@ namespace musicAPP
             l3.ForeColor = SystemColors.ControlDarkDark;
             Label l4 = new Label();
             l4.ForeColor = SystemColors.ControlDarkDark;
+            Label l5 = new Label();
+            l5.ForeColor = SystemColors.ControlDarkDark;
+            Label l6 = new Label();
+            l6.ForeColor = SystemColors.ControlDarkDark;
             if (titulo == null || titulo.Equals(""))
             {
-                l.Text = "Título: Sin título";  
+                l.Text = "Título: Sin título";
             }
             else
             {
@@ -119,11 +131,20 @@ namespace musicAPP
             l3.Size = new Size(350, 18);
             l4.Text = "Album: " + album;
             l4.Size = new Size(350, 18);
-            p2.Size = new Size(455, 70);
+            l5.Text = "Género: " + genero;
+            l5.Size = new Size(350, 18);
+            l6.Text = "Compositor: " + compositores;
+            l6.Size = new Size(350, 18);
+            //p2.Size = new Size(455, 70);
+            //p2.Dock = DockStyle.Fill;
+            p2.Size = new Size(0, 0);
+            p2.AutoSize = true;
             p2.Controls.Add(l);
             p2.Controls.Add(l2);
             p2.Controls.Add(l3);
             p2.Controls.Add(l4);
+            p2.Controls.Add(l5);
+            p2.Controls.Add(l6);
             return p2;
         }
 
@@ -148,7 +169,9 @@ namespace musicAPP
             {
                 reproducirCancion(ubicacion);
             };
-            p3.Size = new Size(113, 70);
+            //p3.Size = new Size(113, 70);
+            //p3.Size = new Size(0, 0);
+            p3.AutoSize = true;
             p3.Controls.Add(b);
             p3.Controls.Add(b2);
             return p3;
@@ -163,7 +186,9 @@ namespace musicAPP
         private void crearCuadroSeccionCanciones()
         {
             FlowLayoutPanel p4 = new FlowLayoutPanel();
-            p4.Size = new Size(415, 42);
+            //p4.Size = new Size(415, 42);
+            p4.Size = new Size(0, 0);
+            p4.AutoSize = true;
             Label l = new Label();
             int cantidadCanciones = CancionController.GetList().Count;
             l.Text = cantidadCanciones + " cancion(es) encontrada(s)";
@@ -322,7 +347,7 @@ namespace musicAPP
                 foreach (var cancion in CancionController.GetList())
                 {
                     if(cancion.Ubicacion.Equals(playlist))
-                        seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, false));
+                        seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, cancion.Generos, cancion.Compositores, false));
                 }
             }
         }
@@ -338,17 +363,17 @@ namespace musicAPP
         {
             Button reproducir = new Button();
             reproducir.Text = "Reproducir";
-            reproducir.ForeColor = Color.White;
             reproducir.Font = new Font("Microsoft Sans Serif", tamanoLetra, FontStyle.Bold);
-            reproducir.BackColor = Color.FromArgb(75, 108, 231);
-            Image play = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\play.png");
             reproducir.Size = new Size(ancho, alto);
-            reproducir.Image = (Image)(new Bitmap(play, new Size(20, 20)));
-            reproducir.ImageAlign = ContentAlignment.MiddleRight;
             reproducir.TextAlign = ContentAlignment.MiddleLeft;
             reproducir.FlatStyle = FlatStyle.Flat;
             reproducir.FlatAppearance.BorderSize = 0;
             reproducir.FlatAppearance.MouseOverBackColor = Color.FromArgb(145, 177, 245);
+            reproducir.ForeColor = Color.White;
+            reproducir.BackColor = Color.FromArgb(75, 108, 231);
+            Image play = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\play.png");
+            reproducir.Image = (Image)(new Bitmap(play, new Size(20, 20)));
+            reproducir.ImageAlign = ContentAlignment.MiddleRight;
             return reproducir;
         }
 
@@ -413,6 +438,7 @@ namespace musicAPP
             FlowLayoutPanel panel4 = new FlowLayoutPanel();
             FlowLayoutPanel panel5 = new FlowLayoutPanel();
             panelTitulos.Size = new Size(280, 52);
+            panelTitulos.Margin = new Padding(0, 0, 0, 10);
             panel1.Size = new Size(280, 26);
             panel2.Size = new Size(280, 26);
             panel3.Size = new Size(108, 52);
@@ -589,6 +615,20 @@ namespace musicAPP
                 media = axWindowsMediaPlayer1.newMedia(song);
                 axWindowsMediaPlayer1.currentPlaylist.appendItem(media);
             }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0112) // WM_SYSCOMMAND
+            {
+                // Check your window state here
+                if (m.WParam == new IntPtr(0xF030)) // Maximize event - SC_MAXIMIZE from Winuser.h
+                {
+                    Debug.WriteLine("maximizado");
+                    this.PerformLayout();
+                }
+            }
+            base.WndProc(ref m);
         }
     }   
 }

@@ -44,12 +44,12 @@ namespace musicAPP
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tituloSeccion = new System.Windows.Forms.FlowLayoutPanel();
-            this.seccion = new System.Windows.Forms.FlowLayoutPanel();
             this.reproducerContainer = new System.Windows.Forms.Panel();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.npgsqlCommand1 = new Npgsql.NpgsqlCommand();
             this.npgsqlCommandBuilder1 = new Npgsql.NpgsqlCommandBuilder();
             this.mensajeAgregarPlaylist = new System.Windows.Forms.ToolTip(this.components);
+            this.seccion = new System.Windows.Forms.FlowLayoutPanel();
             this.sideBar.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -89,9 +89,12 @@ namespace musicAPP
             // seccionPlaylist
             // 
             this.seccionPlaylist.AutoScroll = true;
-            this.seccionPlaylist.Location = new System.Drawing.Point(12, 64);
+            this.seccionPlaylist.Dock = System.Windows.Forms.DockStyle.Left;
+            this.seccionPlaylist.Location = new System.Drawing.Point(0, 61);
+            this.seccionPlaylist.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.seccionPlaylist.Name = "seccionPlaylist";
-            this.seccionPlaylist.Size = new System.Drawing.Size(219, 153);
+            this.seccionPlaylist.Padding = new System.Windows.Forms.Padding(15);
+            this.seccionPlaylist.Size = new System.Drawing.Size(219, 168);
             this.seccionPlaylist.TabIndex = 3;
             // 
             // panel5
@@ -190,9 +193,10 @@ namespace musicAPP
             // 
             // panel2
             // 
+            this.panel2.AutoSize = true;
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel2.Controls.Add(this.tituloSeccion);
             this.panel2.Controls.Add(this.seccion);
+            this.panel2.Controls.Add(this.tituloSeccion);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 127);
             this.panel2.Name = "panel2";
@@ -201,19 +205,13 @@ namespace musicAPP
             // 
             // tituloSeccion
             // 
+            this.tituloSeccion.Dock = System.Windows.Forms.DockStyle.Top;
             this.tituloSeccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(108)))), ((int)(((byte)(231)))));
-            this.tituloSeccion.Location = new System.Drawing.Point(16, 6);
+            this.tituloSeccion.Location = new System.Drawing.Point(0, 0);
             this.tituloSeccion.Name = "tituloSeccion";
-            this.tituloSeccion.Size = new System.Drawing.Size(619, 55);
+            this.tituloSeccion.Padding = new System.Windows.Forms.Padding(15, 15, 15, 25);
+            this.tituloSeccion.Size = new System.Drawing.Size(647, 66);
             this.tituloSeccion.TabIndex = 3;
-            // 
-            // seccion
-            // 
-            this.seccion.AutoScroll = true;
-            this.seccion.Location = new System.Drawing.Point(16, 67);
-            this.seccion.Name = "seccion";
-            this.seccion.Size = new System.Drawing.Size(619, 255);
-            this.seccion.TabIndex = 2;
             // 
             // reproducerContainer
             // 
@@ -226,6 +224,7 @@ namespace musicAPP
             // 
             // axWindowsMediaPlayer1
             // 
+            this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Top;
             this.axWindowsMediaPlayer1.Enabled = true;
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 0);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
@@ -244,6 +243,16 @@ namespace musicAPP
             this.npgsqlCommandBuilder1.QuotePrefix = "\"";
             this.npgsqlCommandBuilder1.QuoteSuffix = "\"";
             // 
+            // seccion
+            // 
+            this.seccion.AutoScroll = true;
+            this.seccion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.seccion.Location = new System.Drawing.Point(0, 66);
+            this.seccion.Name = "seccion";
+            this.seccion.Padding = new System.Windows.Forms.Padding(15);
+            this.seccion.Size = new System.Drawing.Size(647, 268);
+            this.seccion.TabIndex = 4;
+            // 
             // MusicApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -255,8 +264,6 @@ namespace musicAPP
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MusicApp";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -270,6 +277,7 @@ namespace musicAPP
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.reproducerContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
@@ -289,7 +297,6 @@ namespace musicAPP
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel reproducerContainer;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
-        private System.Windows.Forms.FlowLayoutPanel seccion;
         private System.Windows.Forms.Button botonCanciones;
         private System.Windows.Forms.FlowLayoutPanel tituloSeccion;
         private Npgsql.NpgsqlCommand npgsqlCommand1;
@@ -297,6 +304,7 @@ namespace musicAPP
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.FlowLayoutPanel seccionPlaylist;
         private System.Windows.Forms.ToolTip mensajeAgregarPlaylist;
+        private System.Windows.Forms.FlowLayoutPanel seccion;
     }
 }
 
