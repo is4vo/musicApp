@@ -202,7 +202,7 @@ namespace musicAPP
         public void agregarCancion()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.flac;*.ALAC;*.WAV;*.AAC;*.MP3;*.FLAC"; // Valida tipo de archivo
+            ofd.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.flac;*.m4p;*.ALAC;*.WAV;*.AAC;*.MP3;*.FLAC;*.M4P"; // Valida tipo de archivo
             ofd.ShowDialog();
             CancionController.SaveFile(ofd.FileName);
             iniciarlizarPanelesCanciones();
@@ -561,7 +561,7 @@ namespace musicAPP
         private void agregarCanciónAPlaylist(string nombre)
         {
             openFileDialog1.Multiselect = true;
-            openFileDialog1.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.flac;*.ALAC;*.WAV;*.AAC;*.MP3;*.FLAC"; // Valida tipo de archivo
+            openFileDialog1.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.flac;*.m4p;*.ALAC;*.WAV;*.AAC;*.MP3;*.FLAC;*.M4P"; // Valida tipo de archivo
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 PlayListController.AddSong(openFileDialog1, nombre);
