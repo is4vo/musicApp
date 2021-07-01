@@ -704,6 +704,10 @@ namespace musicAPP
                 searchText = searchBox.Text;
                 iniciarlizarPanelesCanciones(typeSearch, searchText);
             }
+            else
+            {
+                iniciarlizarPanelesCanciones(0, "");
+            }
         }
 
         private void searchBox_TextChanged(object sender, EventArgs e)
