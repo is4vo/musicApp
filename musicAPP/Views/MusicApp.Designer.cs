@@ -39,17 +39,21 @@ namespace musicAPP
             this.agregarPlaylist = new System.Windows.Forms.Button();
             this.label_playlist = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.filtro = new System.Windows.Forms.CheckBox();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.typeBox = new System.Windows.Forms.ComboBox();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.botonCanciones = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.seccion = new System.Windows.Forms.FlowLayoutPanel();
             this.tituloSeccion = new System.Windows.Forms.FlowLayoutPanel();
             this.reproducerContainer = new System.Windows.Forms.Panel();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.npgsqlCommand1 = new Npgsql.NpgsqlCommand();
             this.npgsqlCommandBuilder1 = new Npgsql.NpgsqlCommandBuilder();
             this.mensajeAgregarPlaylist = new System.Windows.Forms.ToolTip(this.components);
-            this.seccion = new System.Windows.Forms.FlowLayoutPanel();
             this.sideBar.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -144,6 +148,10 @@ namespace musicAPP
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.filtro);
+            this.panel3.Controls.Add(this.searchBox);
+            this.panel3.Controls.Add(this.typeBox);
             this.panel3.Controls.Add(this.Logo);
             this.panel3.Controls.Add(this.botonCanciones);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -151,6 +159,42 @@ namespace musicAPP
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(237, 232);
             this.panel3.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(196, 153);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Filtrar";
+            // 
+            // filtro
+            // 
+            this.filtro.AutoSize = true;
+            this.filtro.Location = new System.Drawing.Point(204, 175);
+            this.filtro.Name = "filtro";
+            this.filtro.Size = new System.Drawing.Size(15, 14);
+            this.filtro.TabIndex = 9;
+            this.filtro.UseVisualStyleBackColor = true;
+            this.filtro.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // searchBox
+            // 
+            this.searchBox.Location = new System.Drawing.Point(102, 172);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(91, 20);
+            this.searchBox.TabIndex = 8;
+            this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
+            // 
+            // typeBox
+            // 
+            this.typeBox.FormattingEnabled = true;
+            this.typeBox.Location = new System.Drawing.Point(3, 172);
+            this.typeBox.Name = "typeBox";
+            this.typeBox.Size = new System.Drawing.Size(92, 21);
+            this.typeBox.TabIndex = 7;
+            this.typeBox.SelectedIndexChanged += new System.EventHandler(this.typeBox_SelectedIndexChanged);
             // 
             // Logo
             // 
@@ -203,6 +247,16 @@ namespace musicAPP
             this.panel2.Size = new System.Drawing.Size(647, 334);
             this.panel2.TabIndex = 1;
             // 
+            // seccion
+            // 
+            this.seccion.AutoScroll = true;
+            this.seccion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.seccion.Location = new System.Drawing.Point(0, 66);
+            this.seccion.Name = "seccion";
+            this.seccion.Padding = new System.Windows.Forms.Padding(15);
+            this.seccion.Size = new System.Drawing.Size(647, 268);
+            this.seccion.TabIndex = 4;
+            // 
             // tituloSeccion
             // 
             this.tituloSeccion.Dock = System.Windows.Forms.DockStyle.Top;
@@ -243,16 +297,6 @@ namespace musicAPP
             this.npgsqlCommandBuilder1.QuotePrefix = "\"";
             this.npgsqlCommandBuilder1.QuoteSuffix = "\"";
             // 
-            // seccion
-            // 
-            this.seccion.AutoScroll = true;
-            this.seccion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.seccion.Location = new System.Drawing.Point(0, 66);
-            this.seccion.Name = "seccion";
-            this.seccion.Padding = new System.Windows.Forms.Padding(15);
-            this.seccion.Size = new System.Drawing.Size(647, 268);
-            this.seccion.TabIndex = 4;
-            // 
             // MusicApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,6 +319,7 @@ namespace musicAPP
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -305,6 +350,10 @@ namespace musicAPP
         private System.Windows.Forms.FlowLayoutPanel seccionPlaylist;
         private System.Windows.Forms.ToolTip mensajeAgregarPlaylist;
         private System.Windows.Forms.FlowLayoutPanel seccion;
+        private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.ComboBox typeBox;
+        private System.Windows.Forms.CheckBox filtro;
+        private System.Windows.Forms.Label label1;
     }
 }
 

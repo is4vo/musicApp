@@ -56,6 +56,43 @@ namespace musicAPP.Controllers
         }
 
         /// <summary>
+        /// Permite realizar busqueda por parametros en la base de datos
+        /// </summary>
+        /// <param name="type">Indicador del Parametro de busqueda</param>
+        /// <param name="text">Contenido de la busqueda</param>
+        /// <returns>Resultado de la busqueda</returns>
+        public static List<Cancion> searchSong(int type, string text)
+        {
+            List<Cancion> list = new List<Cancion>();
+            ModelContext db = new ModelContext();
+            switch (type)
+            {
+                case 1: // PATH
+                    return db.Canciones.Where(c => c.Ubicacion.ToLower().Contains(text.ToLower())).ToList();
+                case 2: // TITULO
+                    return db.Canciones.Where(c => c.Titulo.ToLower().Contains(text.ToLower())).ToList();
+                case 3: // ALBUM
+                    return db.Canciones.Where(c => c.Album.ToLower().Contains(text.ToLower())).ToList();
+                case 4: // ARTISTA
+                    return db.Canciones.Where(c => c.Artistas.ToLower().Contains(text.ToLower())).ToList();
+                case 5: // GENERO
+                    return db.Canciones.Where(c => c.Generos.ToLower().Contains(text.ToLower())).ToList();
+                case 6: // COMPOSITORES
+                    return db.Canciones.Where(c => c.Compositores.ToLower().Contains(text.ToLower())).ToList();
+                case 7: // DURACION
+                    try
+                    {
+                        return db.Canciones.Where(c => c.Duracion == Double.Parse(text)).ToList();
+                    } catch (Exception)
+                    {
+                        return list;
+                    }
+                default: // TODA LA LISTA
+                    return db.Canciones.ToList();
+            }
+        }
+
+        /// <summary>
         /// Permite eliminar una canción de la base de datos.
         /// </summary>
         /// <param name="path"> Ubicación del archivo que será eliminado </param>

@@ -14,6 +14,10 @@ namespace musicAPP
 {
     public partial class MusicApp : Form
     {
+        static bool busqueda = false;
+        static string searchText = "";
+        static int typeSearch = 0;
+
         public MusicApp()
         {
             InitializeComponent();
@@ -28,19 +32,28 @@ namespace musicAPP
         /// <param name="e"></param>
         private void botonCanciones_Click(object sender, EventArgs e)
         {
-            iniciarlizarPanelesCanciones();
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
+            else
+            {
+                iniciarlizarPanelesCanciones(0, "");
+            }
         }
 
         /// <summary>
         /// Limpia los paneles iniciales de la interfaz y los completa con la información a mostrar de todas las canciones guardadas.
         /// </summary>
-        private void iniciarlizarPanelesCanciones()
+        private void iniciarlizarPanelesCanciones(int type, string text)
         {
             tituloSeccion.Controls.Clear();
             crearCuadroSeccionCanciones();
             seccion.Controls.Clear();
             /* En el panel "seccion" se crea un panel con información por cada canción*/
-            foreach (var cancion in CancionController.GetList())
+            foreach (var cancion in CancionController.searchSong(type, text))
             {
                 seccion.Controls.Add(crearCuadroCancion(cancion.Titulo, cancion.Artistas, cancion.Duracion, cancion.Album, cancion.Ubicacion, cancion.Generos, cancion.Compositores, true));
             }
@@ -55,8 +68,25 @@ namespace musicAPP
         {
             /* Se pone la imagen del logo en el espacio asignado. */
             Logo.Image = Image.FromFile(System.IO.Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\musicApp\\Images\\logo.png");
+            typeBox.Items.Add(" ");
+            typeBox.Items.Add("Ubicación");
+            typeBox.Items.Add("Título");
+            typeBox.Items.Add("Albúm");
+            typeBox.Items.Add("Artista");
+            typeBox.Items.Add("Genero");
+            typeBox.Items.Add("Compositores");
+            typeBox.Items.Add("Duración");
             iniciarlizarPanelesPlaylist();
-            iniciarlizarPanelesCanciones();
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
+            else
+            {
+                iniciarlizarPanelesCanciones(0, "");
+            }
         }
 
         /// <summary>
@@ -189,8 +219,16 @@ namespace musicAPP
             //p4.Size = new Size(415, 42);
             p4.Size = new Size(0, 0);
             p4.AutoSize = true;
+            int cantidadCanciones = 0;
             Label l = new Label();
-            int cantidadCanciones = CancionController.GetList().Count;
+            if (busqueda)
+            {
+                cantidadCanciones = CancionController.searchSong(typeSearch, searchText).Count;
+            }
+            else
+            {
+                cantidadCanciones = CancionController.searchSong(0, "").Count;
+            }
             l.Text = cantidadCanciones + " cancion(es) encontrada(s)";
             l.Margin = new Padding(0, 15, 0, 0);
             l.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
@@ -230,7 +268,16 @@ namespace musicAPP
             ofd.Filter = "Archivos de Audio|*.wav;*.mp3;*.alac;*.flac;*.m4p;*.m4a;*.ALAC;*.WAV;*.AAC;*.MP3;*.FLAC;*.M4P;*.M4A;"; // Valida tipo de archivo
             ofd.ShowDialog();
             CancionController.SaveFile(ofd.FileName);
-            iniciarlizarPanelesCanciones();
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
+            else
+            {
+                iniciarlizarPanelesCanciones(0, "");
+            }
         }
 
         /// <summary>
@@ -242,7 +289,16 @@ namespace musicAPP
         public void eliminarCancion(string ubicacion)
         {
             CancionController.removeFile(ubicacion);
-            iniciarlizarPanelesCanciones();
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
+            else
+            {
+                iniciarlizarPanelesCanciones(0, "");
+            }
 
             /* Se revisa si alguna playlist quedo vacia luego de borrar dicha canción*/
             List<string> listasParaBorrar = new List<string>();
@@ -629,6 +685,37 @@ namespace musicAPP
                 }
             }
             base.WndProc(ref m);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            busqueda = filtro.Checked;
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
+        }
+
+        private void searchBox_TextChanged(object sender, EventArgs e)
+        {
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
+        }
+
+        private void typeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (busqueda)
+            {
+                typeSearch = typeBox.SelectedIndex;
+                searchText = searchBox.Text;
+                iniciarlizarPanelesCanciones(typeSearch, searchText);
+            }
         }
     }   
 }
