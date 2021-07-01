@@ -80,13 +80,7 @@ namespace musicAPP.Controllers
                 case 6: // COMPOSITORES
                     return db.Canciones.Where(c => c.Compositores.ToLower().Contains(text.ToLower())).ToList();
                 case 7: // DURACION
-                    try
-                    {
-                        return db.Canciones.Where(c => c.Duracion == Double.Parse(text)).ToList();
-                    } catch (Exception)
-                    {
-                        return list;
-                    }
+                    return db.Canciones.OrderBy(c => c.Duracion).ToList();
                 default: // TODA LA LISTA
                     return db.Canciones.ToList();
             }

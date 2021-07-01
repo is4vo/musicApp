@@ -692,6 +692,14 @@ namespace musicAPP
             busqueda = filtro.Checked;
             if (busqueda)
             {
+                if (typeSearch == 7)
+                {
+                    searchBox.Enabled = false;
+                }
+                else
+                {
+                    searchBox.Enabled = true;
+                }
                 typeSearch = typeBox.SelectedIndex;
                 searchText = searchBox.Text;
                 iniciarlizarPanelesCanciones(typeSearch, searchText);
@@ -703,6 +711,14 @@ namespace musicAPP
             if (busqueda)
             {
                 typeSearch = typeBox.SelectedIndex;
+                if (typeSearch == 7)
+                {
+                    searchBox.Enabled = false;
+                }
+                else
+                {
+                    searchBox.Enabled = true;
+                }
                 searchText = searchBox.Text;
                 iniciarlizarPanelesCanciones(typeSearch, searchText);
             }
@@ -713,6 +729,14 @@ namespace musicAPP
             if (busqueda)
             {
                 typeSearch = typeBox.SelectedIndex;
+                if (typeSearch == 7)
+                {
+                    searchBox.Enabled = false;
+                }
+                else
+                {
+                    searchBox.Enabled = true;
+                }
                 searchText = searchBox.Text;
                 iniciarlizarPanelesCanciones(typeSearch, searchText);
             }
